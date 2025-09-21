@@ -23,6 +23,7 @@
             --border-color: #e2e8f0;
             --success-color: #28a745;
             --crypto-color: #f7931a;
+            --bnb-color: #f0b90b;
         }
 
         /* General Body Styling */
@@ -49,42 +50,18 @@
             text-align: center;
             animation: fadeIn 0.8s ease-out;
         }
-
-        .donation-container .icon {
-            font-size: 3.5rem;
-            color: var(--primary-color);
-        }
-
-        .donation-container h1 {
-            color: var(--dark-color);
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin: 1rem 0 0.5rem 0;
-        }
-
-        .donation-container p {
-            max-width: 500px;
-            color: var(--light-text);
-            margin: 0 auto 2rem auto;
-            font-size: 1.1rem;
-        }
+        .donation-container .icon { font-size: 3.5rem; color: var(--primary-color); }
+        .donation-container h1 { color: var(--dark-color); font-size: 2.2rem; font-weight: 700; margin: 1rem 0 0.5rem 0; }
+        .donation-container p { max-width: 500px; color: var(--light-text); margin: 0 auto 2rem auto; font-size: 1.1rem; }
 
         .donate-now-btn {
             background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
-            color: var(--white-color);
-            border: none;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            color: var(--white-color); border: none; padding: 1rem 3rem;
+            font-size: 1.2rem; font-weight: 600; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(0, 123, 255, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            display: inline-flex; align-items: center; gap: 10px;
         }
-
         .donate-now-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
@@ -105,126 +82,84 @@
             width: 90%; max-width: 480px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             transform: scale(0.9); transition: transform 0.3s ease, opacity 0.3s ease;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
             max-height: 90vh; /* For mobile */
         }
         .modal-overlay.active .modal-content { transform: scale(1); }
         
         .modal-header {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-            text-align: center;
-            position: relative;
+            padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-color);
+            text-align: center; position: relative; flex-shrink: 0;
         }
         .modal-close-btn {
             position: absolute; top: 10px; right: 10px;
             background: var(--secondary-color); color: var(--light-text);
-            border-radius: 50%; width: 35px; height: 35px;
-            border: none; cursor: pointer; font-size: 1rem;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s ease;
+            border-radius: 50%; width: 35px; height: 35px; border: none;
+            cursor: pointer; font-size: 1rem; display: flex;
+            align-items: center; justify-content: center; transition: all 0.3s ease;
         }
         .modal-close-btn:hover { background-color: var(--border-color); transform: rotate(90deg); }
 
         .modal-header h2 { margin: 0; color: var(--dark-color); font-size: 1.5rem; }
 
-        .modal-body {
-            padding: 2rem;
-            text-align: center;
-            overflow-y: auto; /* For mobile */
-        }
+        .modal-body { padding: 2rem; text-align: center; overflow-y: auto; }
         .modal-body p { margin: 0; line-height: 1.6; }
         
         .modal-footer {
-            padding: 1rem 2rem;
-            background-color: var(--secondary-color);
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            display: flex;
-            gap: 1rem;
+            padding: 1rem 2rem; background-color: var(--secondary-color);
+            border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+            display: flex; gap: 1rem; flex-shrink: 0;
         }
         .modal-footer button {
-            flex: 1; padding: 0.8rem 1.5rem; font-size: 1rem;
-            font-weight: 600; border-radius: 10px; border: none;
-            cursor: pointer; transition: all 0.3s ease;
+            flex: 1; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 600;
+            border-radius: 10px; border: none; cursor: pointer; transition: all 0.3s ease;
         }
-        #confirm-accept-btn { background-color: var(--primary-color); color: var(--white-color); }
-        #confirm-accept-btn:hover { background-color: var(--primary-hover); }
-        #confirm-reject-btn { background-color: var(--white-color); color: var(--dark-color); border: 1px solid var(--border-color); }
-        #confirm-reject-btn:hover { background-color: #f8f9fa; }
+        .modal-accept-btn { background-color: var(--primary-color); color: var(--white-color); }
+        .modal-accept-btn:hover { background-color: var(--primary-hover); }
+        .modal-reject-btn { background-color: var(--white-color); color: var(--dark-color); border: 1px solid var(--border-color); }
+        .modal-reject-btn:hover { background-color: #f8f9fa; }
 
         /* Payment Method Selection */
-        .payment-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        .payment-methods { display: flex; flex-direction: column; gap: 1rem; }
         .payment-method-btn {
             display: flex; align-items: center; gap: 15px; padding: 1rem;
             border-radius: 12px; border: 1px solid var(--border-color);
-            background-color: var(--white-color); cursor: pointer;
-            transition: all 0.3s ease; text-align: left; width: 100%;
-            font-size: 1.1rem; font-family: 'Poppins', sans-serif;
-            font-weight: 500;
+            background-color: var(--white-color); cursor: pointer; transition: all 0.3s ease;
+            text-align: left; width: 100%; font-size: 1.1rem; font-family: 'Poppins', sans-serif; font-weight: 500;
         }
         .payment-method-btn:hover {
             border-color: var(--primary-color); background-color: #f5faff;
             transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
         }
-        .payment-method-btn.active {
-             border-color: var(--primary-color); background-color: #f5faff;
-        }
         .payment-method-btn .icon { font-size: 1.8rem; width: 40px; text-align: center; }
         .payment-method-btn .fa-qrcode { color: var(--primary-color); }
         .payment-method-btn .fa-paper-plane { color: var(--success-color); }
-        .payment-method-btn .fa-btc { color: var(--crypto-color); }
-
-        /* Payment Content Panel */
-        .payment-content-panel { display: none; margin-top: 2rem; animation: fadeIn 0.5s; }
-        .payment-content-panel.active { display: block; }
-        .payment-content-panel h3 { color: var(--dark-color); }
-        .payment-content-panel h4 { margin: 1.5rem 0 0.5rem 0; color: var(--dark-color); }
-        .payment-content-panel p { color: var(--light-text); }
+        .payment-method-btn .fa-bitcoin { color: var(--crypto-color); } /* USDT Icon */
+        
+        /* Payment View Logic */
+        .modal-body .view { display: none; } /* Hide all views by default */
+        .modal-body .view.active { display: block; animation: fadeIn 0.5s; }
         
         .qr-code-image { max-width: 180px; border-radius: 16px; margin: 1rem 0; }
         
-        /* New Copy Box Style */
+        /* Copy Box Style */
         .copy-box {
-            background-color: var(--secondary-color);
-            border-radius: 12px;
-            padding: 0.5rem 0.5rem 0.5rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            margin-top: 1rem;
+            background-color: var(--secondary-color); border-radius: 12px;
+            padding: 0.5rem 0.5rem 0.5rem 1rem; display: flex;
+            justify-content: space-between; align-items: center;
+            border: 1px solid var(--border-color); margin-top: 1rem;
         }
         .copy-box span {
-            font-weight: 500;
-            color: var(--dark-color);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-weight: 500; color: var(--dark-color);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .copy-btn {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            border: none;
-            border-radius: 8px;
-            padding: 0.6rem 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
+            background-color: var(--primary-color); color: var(--white-color);
+            border: none; border-radius: 8px; padding: 0.6rem 1rem;
+            font-weight: 500; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 8px; flex-shrink: 0;
         }
-        .copy-btn:hover {
-            background-color: var(--primary-hover);
-            transform: scale(1.05);
-        }
+        .copy-btn:hover { background-color: var(--primary-hover); transform: scale(1.05); }
 
         /* UPI Input Form Styles */
         .upi-input-group { position: relative; margin: 1rem 0; }
@@ -239,28 +174,30 @@
             box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
         }
         .pay-upi-btn {
-            background: var(--success-color);
-            color: var(--white-color); border: none;
-            padding: 1rem; font-size: 1.1rem; font-weight: 600;
-            border-radius: 12px; cursor: pointer;
-            transition: all 0.3s ease;
+            background: var(--success-color); color: var(--white-color); border: none;
+            padding: 1rem; font-size: 1.1rem; font-weight: 600; border-radius: 12px;
+            cursor: pointer; transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
             display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
         }
         .pay-upi-btn:hover {
-            background-color: #218838;
-            transform: translateY(-3px);
+            background-color: #218838; transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
         }
         .pay-upi-btn:disabled {
             background-color: #90d39f; cursor: not-allowed;
             transform: none; box-shadow: none;
         }
-        .divider {
-            border: none;
-            height: 1px;
-            background-color: var(--border-color);
-            margin: 2rem 0;
+        
+        /* Back Button */
+        .back-btn {
+            background: none; border: 1px solid var(--border-color);
+            color: var(--text-color); font-weight: 500; padding: 0.6rem 1.2rem;
+            border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
+            margin-top: 2rem; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .back-btn:hover {
+            background-color: var(--secondary-color); border-color: var(--light-text);
         }
 
     </style>
@@ -276,7 +213,7 @@
         </button>
     </div>
     
-    <!-- Confirmation Modal -->
+    <!-- Initial Confirmation Modal -->
     <div class="modal-overlay" id="confirmation-modal">
         <div class="modal-content">
             <button class="modal-close-btn" data-target="confirmation-modal"><i class="fa-solid fa-times"></i></button>
@@ -287,88 +224,108 @@
                 <p>Payment karne ke baad, kripya transaction ka <strong>full screenshot</strong> lein aur use diye gaye form mein submit karein.</p>
             </div>
             <div class="modal-footer">
-                <button id="confirm-reject-btn">Reject</button>
-                <button id="confirm-accept-btn">Accept & Proceed</button>
+                <button class="modal-reject-btn" data-target="confirmation-modal">Reject</button>
+                <button class="modal-accept-btn" id="confirm-accept-btn">Accept & Proceed</button>
             </div>
         </div>
     </div>
+
+    <!-- UPI Caution Modal -->
+    <div class="modal-overlay" id="upi-caution-modal">
+        <div class="modal-content">
+             <button class="modal-close-btn" data-target="upi-caution-modal"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header">
+                <h2>Caution</h2>
+            </div>
+            <div class="modal-body">
+                <p>Aap apne UPI app se judne ja rahe hain. Payment ke baad screenshot lena compulsory hai.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-reject-btn" data-target="upi-caution-modal">Reject</button>
+                <button class="modal-accept-btn" id="upi-caution-accept-btn">Accept & Pay</button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Payment Modal -->
     <div class="modal-overlay" id="payment-modal">
         <div class="modal-content">
             <button class="modal-close-btn" data-target="payment-modal"><i class="fa-solid fa-times"></i></button>
             <div class="modal-header">
-                <h2>Choose Payment Method</h2>
+                <h2 id="payment-modal-title">Choose Payment Method</h2>
             </div>
-            <div class="modal-body">
-                <div class="payment-methods">
-                    <button class="payment-method-btn" data-target="qrContent">
-                        <span class="icon"><i class="fa-solid fa-qrcode"></i></span>
-                        Pay using QR Code
-                    </button>
-                    <button class="payment-method-btn" data-target="upiContent">
-                        <span class="icon"><i class="fa-solid fa-paper-plane"></i></span>
-                        Pay using UPI ID
-                    </button>
-                    <button class="payment-method-btn" data-target="usdtContent">
-                        <span class="icon"><i class="fab fa-btc"></i></span>
-                        Pay in USDT
-                    </button>
-                </div>
-
-                <div id="qrContent" class="payment-content-panel">
-                    <h3>Scan to Pay ₹11</h3>
-                    <!-- IMPORTANT: Yahan apne QR code ka sahi path dalein -->
-                    <img src="image/photo_2025-09-21_13-07-01.jpg" alt="Scan to Donate" class="qr-code-image">
-                    <p>Or copy UPI ID</p>
-                    <div class="copy-box">
-                         <!-- IMPORTANT: Yahan apni UPI ID dalein -->
-                        <span id="upi-id-text">your-upi-id@ybl</span>
-                        <button class="copy-btn" data-copy-target="upi-id-text">
-                            <i class="fa-regular fa-copy"></i> Copy
+            <div class="modal-body" id="payment-modal-body">
+                <div id="payment-methods-view" class="view active">
+                    <div class="payment-methods">
+                        <button class="payment-method-btn" data-view="qrContent" data-title="Pay using QR Code">
+                            <span class="icon"><i class="fa-solid fa-qrcode"></i></span>
+                            Pay using QR Code
+                        </button>
+                        <button class="payment-method-btn" data-view="upiContent" data-title="Pay using UPI ID">
+                            <span class="icon"><i class="fa-solid fa-paper-plane"></i></span>
+                            Pay using UPI ID
+                        </button>
+                        <button class="payment-method-btn" data-view="usdtSelectionContent" data-title="Pay with USDT">
+                            <span class="icon"><i class="fa-brands fa-bitcoin"></i></span>
+                            Pay in USDT
                         </button>
                     </div>
                 </div>
 
-                <div id="upiContent" class="payment-content-panel">
-                     <h3>Pay ₹11 via UPI ID</h3>
+                <div id="qrContent" class="view">
+                    <img src="image/photo_2025-09-21_13-07-01.jpg" alt="Scan to Donate" class="qr-code-image">
+                    <p>Or copy UPI ID</p>
+                    <div class="copy-box">
+                        <span id="upi-id-text">your-upi-id@ybl</span>
+                        <button class="copy-btn" data-copy-target="upi-id-text"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <button class="back-btn" data-back-target="payment-methods-view"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                </div>
+
+                <div id="upiContent" class="view">
                      <p>Enter recipient's UPI ID below to pay.</p>
                      <div class="upi-input-group">
                         <i class="fa-solid fa-at"></i>
                         <input type="text" id="upi-id-input" placeholder="Enter UPI ID here" autocomplete="off">
                     </div>
-                    <button class="pay-upi-btn" id="upi-pay-btn" disabled>
-                        <i class="fa-solid fa-shield-halved"></i> Pay ₹11 Now
-                    </button>
+                    <button class="pay-upi-btn" id="upi-pay-btn" disabled><i class="fa-solid fa-shield-halved"></i> Proceed to Pay</button>
+                    <button class="back-btn" data-back-target="payment-methods-view"><i class="fa-solid fa-arrow-left"></i> Back</button>
                 </div>
 
-                <div id="usdtContent" class="payment-content-panel">
-                    <h3>Pay with USDT</h3>
-                    <!-- TRC20 Section -->
-                    <h4>TRC20 Network</h4>
+                <div id="usdtSelectionContent" class="view">
+                    <p>Select the network to pay with USDT.</p>
+                    <div class="payment-methods">
+                        <button class="payment-method-btn" data-view="usdtTrc20Content" data-title="USDT (TRC20 Network)">
+                            <span class="icon"><i class="fa-brands fa-bitcoin"></i></span>
+                            TRC20 Network
+                        </button>
+                        <button class="payment-method-btn" data-view="usdtBnbContent" data-title="USDT (BNB/BEP20)">
+                             <span class="icon" style="color:var(--bnb-color)"><i class="fa-solid fa-bold"></i></span>
+                             BNB Smart Chain (BEP20)
+                        </button>
+                    </div>
+                    <button class="back-btn" data-back-target="payment-methods-view"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                </div>
+                
+                <div id="usdtTrc20Content" class="view">
                     <img src="image/photo_2025-09-21_13-07-01.jpg" alt="TRC20 QR Code" class="qr-code-image">
                     <p>Send only USDT (TRC20) to this address.</p>
                     <div class="copy-box">
-                        <!-- IMPORTANT: Yahan apna USDT TRC20 address dalein -->
                         <span id="trc20-address">bgfbfg5bdf5ert5df5vdf222555cvdf2c5v2 </span>
-                        <button class="copy-btn" data-copy-target="trc20-address">
-                            <i class="fa-regular fa-copy"></i> Copy
-                        </button>
+                        <button class="copy-btn" data-copy-target="trc20-address"><i class="fa-regular fa-copy"></i> Copy</button>
                     </div>
-                    
-                    <hr class="divider">
-                    
-                    <!-- BEP20 Section -->
-                    <h4>BNB Smart Chain (BEP20)</h4>
+                    <button class="back-btn" data-back-target="usdtSelectionContent"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                </div>
+                
+                <div id="usdtBnbContent" class="view">
                     <img src="image/photo_2025-09-21_13-07-01.jpg" alt="BEP20 QR Code" class="qr-code-image">
                     <p>Send only USDT (BEP20) to this address.</p>
                     <div class="copy-box">
-                        <!-- IMPORTANT: Yahan apna USDT BEP20 address dalein -->
                         <span id="bep20-address">gb82v2bg2b8fb2g8285gb2gfbgnghcvfgb2f5b</span>
-                        <button class="copy-btn" data-copy-target="bep20-address">
-                            <i class="fa-regular fa-copy"></i> Copy
-                        </button>
+                        <button class="copy-btn" data-copy-target="bep20-address"><i class="fa-regular fa-copy"></i> Copy</button>
                     </div>
+                    <button class="back-btn" data-back-target="usdtSelectionContent"><i class="fa-solid fa-arrow-left"></i> Back</button>
                 </div>
             </div>
         </div>
@@ -377,52 +334,67 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Modal Control ---
+            const allModals = document.querySelectorAll('.modal-overlay');
             const donateNowBtn = document.getElementById('donate-now-btn');
             const confirmationModal = document.getElementById('confirmation-modal');
             const paymentModal = document.getElementById('payment-modal');
-            const acceptBtn = document.getElementById('confirm-accept-btn');
-            const rejectBtn = document.getElementById('confirm-reject-btn');
-            const allCloseBtns = document.querySelectorAll('.modal-close-btn');
+            const upiCautionModal = document.getElementById('upi-caution-modal');
+            const paymentModalTitle = document.getElementById('payment-modal-title');
+            
+            // Main Action Buttons
+            const confirmAcceptBtn = document.getElementById('confirm-accept-btn');
+            const upiCautionAcceptBtn = document.getElementById('upi-caution-accept-btn');
 
             const openModal = (modal) => modal.classList.add('active');
-            const closeModal = (modal) => modal.classList.remove('active');
-
+            const closeModal = (modal) => {
+                modal.classList.remove('active');
+                if(modal === paymentModal) {
+                    setTimeout(resetToMainMenu, 300);
+                }
+            };
+            
+            // Open initial modal
             donateNowBtn.addEventListener('click', () => openModal(confirmationModal));
 
-            rejectBtn.addEventListener('click', () => closeModal(confirmationModal));
-
-            acceptBtn.addEventListener('click', () => {
+            // Handle "Accept & Proceed" from initial notice
+            confirmAcceptBtn.addEventListener('click', () => {
                 closeModal(confirmationModal);
-                setTimeout(() => openModal(paymentModal), 300); // Small delay for smooth transition
+                setTimeout(() => openModal(paymentModal), 300);
             });
 
-            allCloseBtns.forEach(btn => {
+            // Make all close (X) and reject buttons work
+            document.querySelectorAll('.modal-close-btn, .modal-reject-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const modal = document.getElementById(btn.dataset.target);
                     closeModal(modal);
                 });
             });
 
-            [confirmationModal, paymentModal].forEach(modal => {
+            // Close modals on overlay click
+            allModals.forEach(modal => {
                 modal.addEventListener('click', (event) => {
                     if (event.target === modal) closeModal(modal);
                 });
             });
 
-            // --- Payment Method Switching ---
-            const paymentMethodBtns = document.querySelectorAll('.payment-method-btn');
-            const contentPanels = document.querySelectorAll('.payment-content-panel');
+            // --- Payment View Logic ---
+            const allViews = document.querySelectorAll('.modal-body .view');
+            const allViewButtons = document.querySelectorAll('.payment-method-btn, .back-btn');
+            const defaultTitle = "Choose Payment Method";
 
-            paymentMethodBtns.forEach(btn => {
+            const showView = (viewId, viewTitle = defaultTitle) => {
+                allViews.forEach(view => view.classList.remove('active'));
+                document.getElementById(viewId).classList.add('active');
+                paymentModalTitle.innerText = viewTitle;
+            };
+
+            const resetToMainMenu = () => showView('payment-methods-view', defaultTitle);
+
+            allViewButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    paymentMethodBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-
-                    const targetId = btn.dataset.target;
-                    
-                    contentPanels.forEach(panel => {
-                        panel.classList.toggle('active', panel.id === targetId);
-                    });
+                    const viewId = btn.dataset.view || btn.dataset.backTarget;
+                    const viewTitle = btn.dataset.title || defaultTitle;
+                    showView(viewId, viewTitle);
                 });
             });
             
@@ -430,22 +402,27 @@
             const upiIdInput = document.getElementById('upi-id-input');
             const upiPayBtn = document.getElementById('upi-pay-btn');
 
+            const proceedWithUpiPayment = () => {
+                const recipientUpiId = upiIdInput.value;
+                const recipientName = 'RANDVA COMMUNITY';
+                const transactionNote = 'Donation to Community';
+                // Amount is removed to let user fill it
+                const paymentLink = `upi://pay?pa=${recipientUpiId}&pn=${encodeURIComponent(recipientName)}&tn=${encodeURIComponent(transactionNote)}&cu=INR`;
+                window.location.href = paymentLink;
+            };
+
             upiIdInput.addEventListener('input', () => {
                 const upiRegex = /^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$/;
                 upiPayBtn.disabled = !upiRegex.test(upiIdInput.value);
             });
 
             upiPayBtn.addEventListener('click', () => {
-                if (upiPayBtn.disabled) return;
+                if (!upiPayBtn.disabled) openModal(upiCautionModal);
+            });
 
-                const recipientUpiId = upiIdInput.value;
-                const amount = '11.00';
-                const recipientName = 'RANDVA COMMUNITY';
-                const transactionNote = 'Donation to Community';
-                
-                const paymentLink = `upi://pay?pa=${recipientUpiId}&pn=${encodeURIComponent(recipientName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(transactionNote)}`;
-                
-                window.location.href = paymentLink;
+            upiCautionAcceptBtn.addEventListener('click', () => {
+                closeModal(upiCautionModal);
+                proceedWithUpiPayment();
             });
 
             // --- Copy Button Logic ---
@@ -454,16 +431,10 @@
                 btn.addEventListener('click', () => {
                     const targetId = btn.dataset.copyTarget;
                     const textToCopy = document.getElementById(targetId).innerText;
-
                     navigator.clipboard.writeText(textToCopy).then(() => {
                         const originalContent = btn.innerHTML;
                         btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
-                        setTimeout(() => {
-                            btn.innerHTML = originalContent;
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Failed to copy: ', err);
-                        // You could add an error message here
+                        setTimeout(() => { btn.innerHTML = originalContent; }, 2000);
                     });
                 });
             });
