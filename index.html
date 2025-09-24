@@ -123,7 +123,6 @@
         .payment-method-btn.animate-in { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease-out, transform 0.5s var(--smooth-ease); }
         .payment-method-btn:hover { background-color: rgba(255, 255, 255, 0.1); border-color: var(--primary-accent); transform: scale(1.03); }
         .payment-method-btn .icon { width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; }
-        .premium-upi-icon-container svg { width: 34px; height: 34px; }
 
         .modal-body .view { display: block; opacity: 0; position: absolute; top: 2rem; left: 2rem; right: 2rem; transition: opacity 0.35s var(--smooth-ease), transform 0.35s var(--smooth-ease); transform: scale(0.98); pointer-events: none; }
         .modal-body .view.active { opacity: 1; transform: scale(1); position: static; pointer-events: auto; }
@@ -139,9 +138,17 @@
         .back-btn { background: none; border: 1px solid var(--border-color); color: var(--text-muted); font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; transition: all 0.3s var(--smooth-ease); margin-top: 2rem; display: inline-flex; align-items: center; gap: 8px; }
         .back-btn:hover { background-color: var(--border-color); transform: scale(1.05); }
         
+        /* UPDATED: Mobile Friendly (Responsive) Styles */
         @media (max-width: 600px) { 
-            .donation-container h1 { font-size: 2.2rem; } 
-            .modal-body { min-height: 150px; } 
+            .donation-container h1 { font-size: 2rem; } 
+            .donation-container p { font-size: 1rem; line-height: 1.6; }
+            .donate-now-btn { padding: 1rem 2.5rem; font-size: 1.1rem; }
+            .modal-content { width: 95%; max-height: 95vh; }
+            .modal-header { padding: 1.25rem 1.5rem; }
+            .modal-header h2 { font-size: 1.3rem; }
+            .modal-body { padding: 1.5rem; min-height: auto; }
+            .modal-footer { padding: 1rem 1.5rem; }
+            .payment-method-btn { padding: 0.9rem; font-size: 1rem; }
             .logo { max-width: 100px; }
         }
     </style>
@@ -172,13 +179,12 @@
             <div class="modal-body" id="payment-modal-body">
                 <div id="payment-methods-view" class="view active">
                     <div class="payment-methods">
-                        <button class="payment-method-btn" data-view="qrContent" data-title="Pay with QR Code"><span class="icon"><i class="fa-solid fa-qrcode" style="color:var(--secondary-accent);"></i></span>Pay with QR Code</button>
-                        <button class="payment-method-btn" id="direct-upi-pay-btn"><span class="icon premium-upi-icon-container"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="a" x1="12" x2="12" y1="2" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#8E2DE2"/><stop offset="1" stop-color="#4A00E0"/></linearGradient></defs><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1 14H9V8h2v8Zm4 0h-2V8h2v8Z" fill="url(#a)"/></svg></span>Pay via UPI App</button>
+                        <button class="payment-method-btn" data-view="qrContent" data-title="Pay with UPI / QR Code"><span class="icon"><i class="fa-solid fa-qrcode" style="color:var(--secondary-accent);"></i></span>Pay with UPI / QR Code</button>
                         <button class="payment-method-btn" data-view="usdtSelectionContent" data-title="Pay with Crypto"><span class="icon"><i class="fa-brands fa-bitcoin" style="color:var(--crypto-color);"></i></span>Pay in USDT</button>
                     </div>
                 </div>
                 <div id="qrContent" class="view">
-                    <img src="/image/Gemini_Generated_Image_22nz3a22nz3a22nz.png" alt="Payment QR Code" class="qr-code-image">
+                    <img id="upi-qr-code" src="" alt="Payment QR Code" class="qr-code-image">
                     <p style="font-size: 0.9rem; margin-top: 1rem;">Scan the QR code or copy the UPI ID below.</p>
                     <div class="copy-box"><span id="upi-id-text">8808703225@upi</span><button class="copy-btn" data-copy-target="upi-id-text"><i class="fa-regular fa-copy"></i> Copy</button></div>
                     <button class="back-btn" data-back-target="payment-methods-view" data-title="Choose Payment Method"><i class="fa-solid fa-arrow-left"></i> Back</button>
@@ -189,16 +195,6 @@
             </div>
         </div>
     </div>
-    <div class="modal-overlay" id="upi-caution-modal">
-        <div class="modal-content">
-            <div class="modal-header"><button class="modal-close-btn" data-target="upi-caution-modal"><i class="fa-solid fa-times"></i></button><h2>Final Confirmation</h2></div>
-            <div class="modal-body"><p>You are about to be redirected to your UPI app. Please confirm to proceed.</p></div>
-            <div class="modal-footer">
-                <button class="modal-reject-btn" data-target="upi-caution-modal">Back</button>
-                <button class="modal-accept-btn" id="upi-caution-accept-btn">Confirm & Pay</button>
-            </div>
-        </div>
-    </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -206,12 +202,16 @@
         const donateNowBtn = document.getElementById('donate-now-btn');
         const confirmationModal = document.getElementById('confirmation-modal');
         const paymentModal = document.getElementById('payment-modal');
-        const upiCautionModal = document.getElementById('upi-caution-modal');
         const paymentModalBody = document.getElementById('payment-modal-body');
         const paymentModalTitle = document.getElementById('payment-modal-title');
         const confirmAcceptBtn = document.getElementById('confirm-accept-btn');
-        const upiCautionAcceptBtn = document.getElementById('upi-caution-accept-btn');
-        const directUpiPayBtn = document.getElementById('direct-upi-pay-btn');
+        
+        const upiId = '8808703225@upi';
+        const upiLink = `upi://pay?pa=${upiId}&pn=Ganga%20Gurukulam`;
+        const qrCodeImg = document.getElementById('upi-qr-code');
+        if (qrCodeImg) {
+            qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiLink)}`;
+        }
         
         const resetPaymentModal = () => {
             const allViews = paymentModalBody.querySelectorAll('.view');
@@ -243,7 +243,7 @@
                 item.offsetHeight;
                 item.style.animation = ''; 
             });
-            openModal(confirmationModal);
+            openModal(confirmation-modal);
         });
 
         confirmAcceptBtn.addEventListener('click', () => {
@@ -260,17 +260,13 @@
         document.querySelectorAll('.modal-reject-btn, .modal-close-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const targetModal = document.getElementById(btn.dataset.target);
-                if (targetModal) {
-                    closeModal(targetModal);
-                }
+                if (targetModal) closeModal(targetModal);
             });
         });
 
         allModals.forEach(modal => {
             modal.addEventListener('click', (event) => { 
-                if (event.target === modal) {
-                    closeModal(modal);
-                }
+                if (event.target === modal) closeModal(modal);
             });
         });
 
@@ -293,26 +289,9 @@
             }
         };
 
-        const proceedWithUpiPayment = () => {
-            const recipientUpiId = '8808703225@upi';
-            // Using the most compatible UPI link format
-            const paymentLink = `upi://pay?pa=${recipientUpiId}`;
-            window.location.href = paymentLink;
-        };
-
-        upiCautionAcceptBtn.addEventListener('click', () => {
-            closeModal(upiCautionModal);
-            closeModal(paymentModal);
-            proceedWithUpiPayment();
-        });
-
-        directUpiPayBtn.addEventListener('click', () => {
-            openModal(upiCautionModal);
-        });
-
         paymentModalBody.addEventListener('click', (e) => {
             const button = e.target.closest('.payment-method-btn, .back-btn');
-            if (!button || button.id === 'direct-upi-pay-btn') return;
+            if (!button) return;
             
             const viewId = button.dataset.view || button.dataset.backTarget;
             const viewTitle = button.dataset.title || defaultTitle;
