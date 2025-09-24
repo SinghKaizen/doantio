@@ -295,23 +295,18 @@
 
         const proceedWithUpiPayment = () => {
             const recipientUpiId = '8808703225@upi';
-            // FIXED: Shortened recipient name for better compatibility with UPI apps
-            const recipientName = 'Ganga Gurukulam';
-            const transactionNote = 'Donation to Academy';
-            // FIXED: Removed currency parameter for broader compatibility
-            const paymentLink = `upi://pay?pa=${recipientUpiId}&pn=${encodeURIComponent(recipientName)}&tn=${encodeURIComponent(transactionNote)}`;
+            // Using the most compatible UPI link format
+            const paymentLink = `upi://pay?pa=${recipientUpiId}`;
             window.location.href = paymentLink;
         };
 
         upiCautionAcceptBtn.addEventListener('click', () => {
             closeModal(upiCautionModal);
-            // Also close the underlying payment modal as the flow is complete
             closeModal(paymentModal);
             proceedWithUpiPayment();
         });
 
         directUpiPayBtn.addEventListener('click', () => {
-            // Don't close payment modal, just open caution on top so user can go back
             openModal(upiCautionModal);
         });
 
