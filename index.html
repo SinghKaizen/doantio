@@ -64,25 +64,15 @@
 
         .logo-container { margin-bottom: 1.5rem; }
         .logo { 
-            max-width: 150px; 
-            height: auto; 
-            filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.6)); 
-            border-radius: 50%; 
-            border: 3px solid rgba(255, 255, 255, 0.2); 
-            padding: 5px; 
-            box-sizing: border-box;
+            max-width: 150px; height: auto; filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.6)); 
+            border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.2); 
+            padding: 5px; box-sizing: border-box;
         }
         
         .donation-container h1 { 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 3rem; 
-            font-weight: 800; 
-            margin: 0.5rem 0; 
-            color: #E0E0FF; 
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); 
-            letter-spacing: 0.05em; 
-            opacity: 0; 
-            animation: fadeIn 0.8s 0.1s ease-out forwards; 
+            font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 800; 
+            margin: 0.5rem 0; color: #E0E0FF; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); 
+            letter-spacing: 0.05em; opacity: 0; animation: fadeIn 0.8s 0.1s ease-out forwards; 
         }
         .donation-container p { max-width: 580px; margin: 0 auto 2.5rem auto; font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; opacity: 0; animation: fadeIn 0.8s 0.2s ease-out forwards; }
         
@@ -98,7 +88,6 @@
         .donate-now-btn .fa-heart { transition: transform 0.3s var(--smooth-ease); }
         .donate-now-btn:hover .fa-heart { transform: scale(1.2); }
         
-        /* FIXED: Added pointer-events to prevent inactive modals from blocking clicks */
         .modal-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0, 0, 0, 0.5); 
@@ -106,11 +95,11 @@
             z-index: 1000; 
             opacity: 0; visibility: hidden; 
             transition: opacity 0.4s ease, visibility 0s 0.4s;
-            pointer-events: none; /* Inactive modals will not intercept clicks */
+            pointer-events: none;
         }
         .modal-overlay.active { 
             opacity: 1; visibility: visible; 
-            pointer-events: auto; /* Active modals will intercept clicks */
+            pointer-events: auto;
         }
         
         .modal-content { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--border-color); border-radius: 24px; width: 90%; max-width: 480px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; max-height: 90vh; will-change: transform, opacity; }
@@ -254,6 +243,7 @@
                 item.offsetHeight;
                 item.style.animation = ''; 
             });
+            // FIXED: Corrected variable name from confirmation-modal to confirmationModal
             openModal(confirmationModal);
         });
 
