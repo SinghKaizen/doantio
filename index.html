@@ -3,443 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Our Mission - RANDVA COMMUNITY</title>
+    <title>Ganga Gurukulam Career Academy - Support Us</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         :root {
-            --primary-color: #007BFF;
-            --primary-hover: #0056b3;
-            --secondary-color: #f0f5fa;
-            --dark-color: #1a202c;
-            --text-color: #4a5568;
-            --light-text: #718096;
-            --background-color: #f7fafc;
+            --primary-accent: #8A2BE2;
+            --primary-glow: rgba(138, 43, 226, 0.4);
+            --secondary-accent: #4A90E2;
+            --dark-bg: #100a1f;
+            --glass-bg: rgba(22, 25, 47, 0.6);
+            --text-light: #f0f0f0;
+            --text-muted: #a0a0b0;
             --white-color: #ffffff;
-            --border-color: #e2e8f0;
+            --border-color: rgba(255, 255, 255, 0.15);
             --success-color: #28a745;
             --crypto-color: #f7931a;
             --bnb-color: #f0b90b;
+            --tron-color: #eb0029;
+            /* SMOOTHER Easing function for animations */
+            --smooth-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* General Body Styling */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at top left, var(--primary-accent) 0%, transparent 40%),
+                              radial-gradient(circle at bottom right, var(--secondary-accent) 0%, transparent 40%);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            color: var(--text-light);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 1rem;
             box-sizing: border-box;
+            overflow: hidden;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes modalSlideIn { from { opacity: 0; transform: translateY(50px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-        /* Main Container */
         .donation-container {
             text-align: center;
-            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 1;
+            /* SMOOTHER transition */
+            transition: all 0.4s var(--smooth-ease);
+            will-change: transform, filter; /* Performance hint for browser */
         }
-        .donation-container .icon { font-size: 3.5rem; color: var(--primary-color); }
-        .donation-container h1 { color: var(--dark-color); font-size: 2.2rem; font-weight: 700; margin: 1rem 0 0.5rem 0; }
-        .donation-container p { max-width: 500px; color: var(--light-text); margin: 0 auto 2rem auto; font-size: 1.1rem; }
 
+        body.modal-is-active .donation-container {
+            filter: blur(10px) brightness(0.7);
+            transform: scale(0.95);
+        }
+
+        .logo-container { margin-bottom: 1.5rem; }
+        .logo { 
+            max-width: 150px; 
+            height: auto; 
+            filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.6)); 
+            border-radius: 50%; 
+            border: 3px solid rgba(255, 255, 255, 0.2); 
+            padding: 5px; 
+            box-sizing: border-box;
+        }
+        
+        .donation-container h1 { 
+            font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 800; 
+            margin: 0.5rem 0; color: #E0E0FF; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); 
+            letter-spacing: 0.05em; opacity: 0; animation: fadeIn 0.8s 0.1s ease-out forwards; 
+        }
+        .donation-container p { max-width: 580px; margin: 0 auto 2.5rem auto; font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; opacity: 0; animation: fadeIn 0.8s 0.2s ease-out forwards; }
+        
         .donate-now-btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
-            color: var(--white-color); border: none; padding: 1rem 3rem;
-            font-size: 1.2rem; font-weight: 600; border-radius: 50px;
-            cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.3);
-            display: inline-flex; align-items: center; gap: 10px;
+            background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+            color: var(--white-color); border: none; padding: 1.2rem 3.5rem; font-size: 1.3rem; font-weight: 600; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s var(--smooth-ease);
+            box-shadow: 0 0 30px var(--primary-glow);
+            display: inline-flex; align-items: center; gap: 12px;
+            opacity: 0; animation: fadeIn 0.8s 0.3s ease-out forwards;
         }
-        .donate-now-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
-        }
+        .donate-now-btn:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 0 45px var(--primary-glow); }
+        .donate-now-btn .fa-heart { transition: transform 0.3s var(--smooth-ease); }
+        .donate-now-btn:hover .fa-heart { transform: scale(1.2); }
         
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0s 0.3s;
-        }
-        .modal-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.3s ease; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s 0.4s; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
         
-        .modal-content {
-            background: var(--white-color); border-radius: 20px;
-            width: 90%; max-width: 480px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            transform: scale(0.9); transition: transform 0.3s ease, opacity 0.3s ease;
-            display: flex; flex-direction: column;
-            max-height: 90vh; /* For mobile */
-        }
-        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-content { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--border-color); border-radius: 24px; width: 90%; max-width: 480px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; max-height: 90vh; will-change: transform, opacity; }
+        .modal-overlay.active .modal-content { animation: modalSlideIn 0.4s var(--smooth-ease) forwards; }
         
-        .modal-header {
-            padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-color);
-            text-align: center; position: relative; flex-shrink: 0;
-        }
-        .modal-close-btn {
-            position: absolute; top: 10px; right: 10px;
-            background: var(--secondary-color); color: var(--light-text);
-            border-radius: 50%; width: 35px; height: 35px; border: none;
-            cursor: pointer; font-size: 1rem; display: flex;
-            align-items: center; justify-content: center; transition: all 0.3s ease;
-        }
-        .modal-close-btn:hover { background-color: var(--border-color); transform: rotate(90deg); }
-
-        .modal-header h2 { margin: 0; color: var(--dark-color); font-size: 1.5rem; }
-
-        .modal-body { padding: 2rem; text-align: center; overflow-y: auto; }
-        .modal-body p { margin: 0; line-height: 1.6; }
+        .modal-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-color); text-align: center; position: relative; flex-shrink: 0; }
+        .modal-header h2 { margin: 0; color: var(--text-light); font-size: 1.5rem; }
         
-        .modal-footer {
-            padding: 1rem 2rem; background-color: var(--secondary-color);
-            border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
-            display: flex; gap: 1rem; flex-shrink: 0;
-        }
-        .modal-footer button {
-            flex: 1; padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 600;
-            border-radius: 10px; border: none; cursor: pointer; transition: all 0.3s ease;
-        }
-        .modal-accept-btn { background-color: var(--primary-color); color: var(--white-color); }
-        .modal-accept-btn:hover { background-color: var(--primary-hover); }
-        .modal-reject-btn { background-color: var(--white-color); color: var(--dark-color); border: 1px solid var(--border-color); }
-        .modal-reject-btn:hover { background-color: #f8f9fa; }
-
-        /* Payment Method Selection */
+        .modal-close-btn { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.1); color: var(--text-muted); border-radius: 50%; width: 38px; height: 38px; border: none; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s var(--smooth-ease); }
+        .modal-close-btn:hover { background: rgba(255,255,255,0.2); color: var(--text-light); transform: rotate(90deg) scale(1.1); }
+        
+        .modal-body { padding: 2rem; text-align: center; overflow-y: auto; position: relative; min-height: 150px; }
+        .modal-footer { padding: 1.25rem 2rem; background-color: rgba(0,0,0,0.2); border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; display: flex; gap: 1rem; flex-shrink: 0; border-top: 1px solid var(--border-color); justify-content: center; }
+        
+        .modal-content .fade-in-item { opacity: 0; animation: fadeIn 0.4s var(--smooth-ease) forwards; }
+        #confirmation-modal .modal-header.fade-in-item { animation-delay: 0.1s; }
+        #confirmation-modal .modal-body.fade-in-item { animation-delay: 0.2s; }
+        #confirmation-modal .modal-footer.fade-in-item { animation-delay: 0.3s; }
+        
         .payment-methods { display: flex; flex-direction: column; gap: 1rem; }
-        .payment-method-btn {
-            display: flex; align-items: center; gap: 15px; padding: 1rem;
-            border-radius: 12px; border: 1px solid var(--border-color);
-            background-color: var(--white-color); cursor: pointer; transition: all 0.3s ease;
-            text-align: left; width: 100%; font-size: 1.1rem; font-family: 'Poppins', sans-serif; font-weight: 500;
-        }
-        .payment-method-btn:hover {
-            border-color: var(--primary-color); background-color: #f5faff;
-            transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
-        }
-        .payment-method-btn .icon { font-size: 1.8rem; width: 40px; text-align: center; }
-        .payment-method-btn .fa-qrcode { color: var(--primary-color); }
-        .payment-method-btn .fa-paper-plane { color: var(--success-color); }
-        .payment-method-btn .fa-bitcoin { color: var(--crypto-color); } /* USDT Icon */
-        
-        /* Payment View Logic */
-        .modal-body .view { display: none; } /* Hide all views by default */
-        .modal-body .view.active { display: block; animation: fadeIn 0.5s; }
-        
-        .qr-code-image { max-width: 180px; border-radius: 16px; margin: 1rem 0; }
-        
-        /* Copy Box Style */
-        .copy-box {
-            background-color: var(--secondary-color); border-radius: 12px;
-            padding: 0.5rem 0.5rem 0.5rem 1rem; display: flex;
-            justify-content: space-between; align-items: center;
-            border: 1px solid var(--border-color); margin-top: 1rem;
-        }
-        .copy-box span {
-            font-weight: 500; color: var(--dark-color);
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .copy-btn {
-            background-color: var(--primary-color); color: var(--white-color);
-            border: none; border-radius: 8px; padding: 0.6rem 1rem;
-            font-weight: 500; cursor: pointer; transition: all 0.3s ease;
-            display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-        }
-        .copy-btn:hover { background-color: var(--primary-hover); transform: scale(1.05); }
+        .payment-method-btn { display: flex; align-items: center; gap: 15px; padding: 1.1rem; border-radius: 16px; border: 1px solid var(--border-color); background-color: rgba(255, 255, 255, 0.05); color: var(--text-light); cursor: pointer; text-align: left; width: 100%; font-size: 1.1rem; font-family: 'Poppins', sans-serif; font-weight: 500; opacity: 0; transform: translateY(20px); transition: all 0.3s var(--smooth-ease); }
+        .payment-method-btn.animate-in { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease-out, transform 0.5s var(--smooth-ease); }
+        .payment-method-btn:hover { background-color: rgba(255, 255, 255, 0.1); border-color: var(--primary-accent); transform: scale(1.03); }
+        .payment-method-btn .icon { width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; }
+        .premium-upi-icon-container svg { width: 34px; height: 34px; }
 
-        /* UPI Input Form Styles */
-        .upi-input-group { position: relative; margin: 1rem 0; }
-        .upi-input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--light-text); }
-        #upi-id-input {
-            width: 100%; padding: 14px 16px 14px 45px; font-size: 1rem;
-            border-radius: 10px; border: 1px solid var(--border-color);
-            box-sizing: border-box; transition: all 0.3s ease; background-color: #fdfdfd;
-        }
-        #upi-id-input:focus {
-            outline: none; border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
-        }
-        .pay-upi-btn {
-            background: var(--success-color); color: var(--white-color); border: none;
-            padding: 1rem; font-size: 1.1rem; font-weight: 600; border-radius: 12px;
-            cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.3);
-            display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
-        }
-        .pay-upi-btn:hover {
-            background-color: #218838; transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
-        }
-        .pay-upi-btn:disabled {
-            background-color: #90d39f; cursor: not-allowed;
-            transform: none; box-shadow: none;
-        }
-        
-        /* Back Button */
-        .back-btn {
-            background: none; border: 1px solid var(--border-color);
-            color: var(--text-color); font-weight: 500; padding: 0.6rem 1.2rem;
-            border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
-            margin-top: 2rem; display: inline-flex; align-items: center; gap: 8px;
-        }
-        .back-btn:hover {
-            background-color: var(--secondary-color); border-color: var(--light-text);
-        }
+        .modal-body .view { display: block; opacity: 0; position: absolute; top: 2rem; left: 2rem; right: 2rem; transition: opacity 0.35s var(--smooth-ease), transform 0.35s var(--smooth-ease); transform: scale(0.98); pointer-events: none; }
+        .modal-body .view.active { opacity: 1; transform: scale(1); position: static; pointer-events: auto; }
 
+        .qr-code-image { max-width: 180px; border-radius: 16px; margin: 0.5rem 0; background-color: white; padding: 10px; }
+        .copy-box { background-color: rgba(0,0,0,0.3); border-radius: 12px; padding: 0.5rem 0.5rem 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color); margin-top: 1rem; }
+        .copy-box span { font-weight: 500; color: var(--text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.9rem; }
+        .action-btn, .modal-footer button, .copy-btn { border: none; border-radius: 12px; padding: 0.8rem 1.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s var(--smooth-ease); }
+        .action-btn.primary, .copy-btn, .modal-footer .modal-accept-btn { background: var(--primary-accent); color: var(--white-color); }
+        .action-btn.primary:hover, .copy-btn:hover, .modal-footer .modal-accept-btn:hover { background: var(--secondary-accent); transform: scale(1.05); }
+        .modal-footer .modal-reject-btn { background: rgba(255,255,255,0.1); color: var(--text-light); }
+        .modal-footer .modal-reject-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+        .back-btn { background: none; border: 1px solid var(--border-color); color: var(--text-muted); font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; transition: all 0.3s var(--smooth-ease); margin-top: 2rem; display: inline-flex; align-items: center; gap: 8px; }
+        .back-btn:hover { background-color: var(--border-color); transform: scale(1.05); }
+        
+        @media (max-width: 600px) { 
+            .donation-container h1 { font-size: 2.2rem; } 
+            .modal-body { min-height: 150px; } 
+            .logo { max-width: 100px; }
+        }
     </style>
 </head>
 <body>
-
+    
     <div class="donation-container">
-        <div class="icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-        <h1>Support Our Mission</h1>
-        <p>Your small contribution helps us keep the community running and provide valuable content. Thank you for your support!</p>
-        <button class="donate-now-btn" id="donate-now-btn">
-            <i class="fa-solid fa-heart"></i> Donate Now
-        </button>
+        <div class="logo-container"><img src="/image/Gemini_Generated_Image_39yaov39yaov39ya-removebg-preview.png" alt="Ganga Gurukulam Logo" class="logo"></div>
+        <h1>Ganga Gurukulam Career Academy</h1>
+        <p>Support our mission. Your small contribution helps us keep the community running and provide valuable content.</p>
+        <button class="donate-now-btn" id="donate-now-btn"><i class="fa-solid fa-heart"></i> Donate Now</button>
     </div>
     
-    <!-- Initial Confirmation Modal -->
     <div class="modal-overlay" id="confirmation-modal">
         <div class="modal-content">
-            <button class="modal-close-btn" data-target="confirmation-modal"><i class="fa-solid fa-times"></i></button>
-            <div class="modal-header">
-                <h2>Important Notice</h2>
-            </div>
-            <div class="modal-body">
-                <p>Payment karne ke baad, kripya transaction ka <strong>full screenshot</strong> lein aur use diye gaye form mein submit karein.</p>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-reject-btn" data-target="confirmation-modal">Reject</button>
-                <button class="modal-accept-btn" id="confirm-accept-btn">Accept & Proceed</button>
+            <div class="modal-header fade-in-item"><button class="modal-close-btn" data-target="confirmation-modal"><i class="fa-solid fa-times"></i></button><h2>Important Notice</h2></div>
+            <div class="modal-body fade-in-item"><p>After making the payment, please take a <strong>full screenshot</strong> of the transaction for your records.</p></div>
+            <div class="modal-footer fade-in-item">
+                <button class="modal-reject-btn" data-target="confirmation-modal">Back</button>
+                <button class="modal-accept-btn" id="confirm-accept-btn">Continue</button>
             </div>
         </div>
     </div>
 
-    <!-- UPI Caution Modal -->
-    <div class="modal-overlay" id="upi-caution-modal">
-        <div class="modal-content">
-             <button class="modal-close-btn" data-target="upi-caution-modal"><i class="fa-solid fa-times"></i></button>
-            <div class="modal-header">
-                <h2>Caution</h2>
-            </div>
-            <div class="modal-body">
-                <p>Aap apne UPI app se judne ja rahe hain. Payment ke baad screenshot lena compulsory hai.</p>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-reject-btn" data-target="upi-caution-modal">Reject</button>
-                <button class="modal-accept-btn" id="upi-caution-accept-btn">Accept & Pay</button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Payment Modal -->
     <div class="modal-overlay" id="payment-modal">
         <div class="modal-content">
-            <button class="modal-close-btn" data-target="payment-modal"><i class="fa-solid fa-times"></i></button>
-            <div class="modal-header">
-                <h2 id="payment-modal-title">Choose Payment Method</h2>
-            </div>
+            <div class="modal-header"><button class="modal-close-btn" data-target="payment-modal"><i class="fa-solid fa-times"></i></button><h2 id="payment-modal-title">Choose Payment Method</h2></div>
             <div class="modal-body" id="payment-modal-body">
                 <div id="payment-methods-view" class="view active">
                     <div class="payment-methods">
-                        <button class="payment-method-btn" data-view="qrContent" data-title="Pay using QR Code">
-                            <span class="icon"><i class="fa-solid fa-qrcode"></i></span>
-                            Pay using QR Code
-                        </button>
-                        <button class="payment-method-btn" data-view="upiContent" data-title="Pay using UPI ID">
-                            <span class="icon"><i class="fa-solid fa-paper-plane"></i></span>
-                            Pay using UPI ID
-                        </button>
-                        <button class="payment-method-btn" data-view="usdtSelectionContent" data-title="Pay with USDT">
-                            <span class="icon"><i class="fa-brands fa-bitcoin"></i></span>
-                            Pay in USDT
-                        </button>
+                        <button class="payment-method-btn" data-view="qrContent" data-title="Pay with QR Code"><span class="icon"><i class="fa-solid fa-qrcode" style="color:var(--secondary-accent);"></i></span>Pay with QR Code</button>
+                        <button class="payment-method-btn" id="direct-upi-pay-btn"><span class="icon premium-upi-icon-container"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="a" x1="12" x2="12" y1="2" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#8E2DE2"/><stop offset="1" stop-color="#4A00E0"/></linearGradient></defs><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1 14H9V8h2v8Zm4 0h-2V8h2v8Z" fill="url(#a)"/></svg></span>Pay via UPI App</button>
+                        <button class="payment-method-btn" data-view="usdtSelectionContent" data-title="Pay with Crypto"><span class="icon"><i class="fa-brands fa-bitcoin" style="color:var(--crypto-color);"></i></span>Pay in USDT</button>
                     </div>
                 </div>
-
                 <div id="qrContent" class="view">
-                    <img src="image/photo_2025-09-21_13-07-01.jpg" alt="Scan to Donate" class="qr-code-image">
-                    <p>Or copy UPI ID</p>
-                    <div class="copy-box">
-                        <span id="upi-id-text">your-upi-id@ybl</span>
-                        <button class="copy-btn" data-copy-target="upi-id-text"><i class="fa-regular fa-copy"></i> Copy</button>
-                    </div>
-                    <button class="back-btn" data-back-target="payment-methods-view"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <img src="/image/photo_2025-09-21_13-07-01.jpg" alt="Payment QR Code" class="qr-code-image">
+                    <p style="font-size: 0.9rem; margin-top: 1rem;">Scan the QR code or copy the UPI ID below.</p>
+                    <div class="copy-box"><span id="upi-id-text">8808703225@upi</span><button class="copy-btn" data-copy-target="upi-id-text"><i class="fa-regular fa-copy"></i> Copy</button></div>
+                    <button class="back-btn" data-back-target="payment-methods-view" data-title="Choose Payment Method"><i class="fa-solid fa-arrow-left"></i> Back</button>
                 </div>
-
-                <div id="upiContent" class="view">
-                     <p>Enter recipient's UPI ID below to pay.</p>
-                     <div class="upi-input-group">
-                        <i class="fa-solid fa-at"></i>
-                        <input type="text" id="upi-id-input" placeholder="Enter UPI ID here" autocomplete="off">
-                    </div>
-                    <button class="pay-upi-btn" id="upi-pay-btn" disabled><i class="fa-solid fa-shield-halved"></i> Proceed to Pay</button>
-                    <button class="back-btn" data-back-target="payment-methods-view"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                </div>
-
-                <div id="usdtSelectionContent" class="view">
-                    <p>Select the network to pay with USDT.</p>
-                    <div class="payment-methods">
-                        <button class="payment-method-btn" data-view="usdtTrc20Content" data-title="USDT (TRC20 Network)">
-                            <span class="icon"><i class="fa-brands fa-bitcoin"></i></span>
-                            TRC20 Network
-                        </button>
-                        <button class="payment-method-btn" data-view="usdtBnbContent" data-title="USDT (BNB/BEP20)">
-                             <span class="icon" style="color:var(--bnb-color)"><i class="fa-solid fa-bold"></i></span>
-                             BNB Smart Chain (BEP20)
-                        </button>
-                    </div>
-                    <button class="back-btn" data-back-target="payment-methods-view"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                </div>
-                
-                <div id="usdtTrc20Content" class="view">
-                    <img src="image/photo_2025-09-21_13-07-01.jpg" alt="TRC20 QR Code" class="qr-code-image">
-                    <p>Send only USDT (TRC20) to this address.</p>
-                    <div class="copy-box">
-                        <span id="trc20-address">bgfbfg5bdf5ert5df5vdf222555cvdf2c5v2 </span>
-                        <button class="copy-btn" data-copy-target="trc20-address"><i class="fa-regular fa-copy"></i> Copy</button>
-                    </div>
-                    <button class="back-btn" data-back-target="usdtSelectionContent"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                </div>
-                
-                <div id="usdtBnbContent" class="view">
-                    <img src="image/photo_2025-09-21_13-07-01.jpg" alt="BEP20 QR Code" class="qr-code-image">
-                    <p>Send only USDT (BEP20) to this address.</p>
-                    <div class="copy-box">
-                        <span id="bep20-address">gb82v2bg2b8fb2g8285gb2gfbgnghcvfgb2f5b</span>
-                        <button class="copy-btn" data-copy-target="bep20-address"><i class="fa-regular fa-copy"></i> Copy</button>
-                    </div>
-                    <button class="back-btn" data-back-target="usdtSelectionContent"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                </div>
+                <div id="usdtSelectionContent" class="view"><p>Select the network for USDT payment.</p><div class="payment-methods"><button class="payment-method-btn" data-view="usdtTrc20Content" data-title="USDT (TRC20)"><span class="icon"><i class="fa-solid fa-bolt" style="color: var(--tron-color);"></i></span>TRC20 (TRON Network)</button><button class="payment-method-btn" data-view="usdtBnbContent" data-title="USDT (BEP20)"><span class="icon"><i class="fa-solid fa-cubes" style="color: var(--bnb-color);"></i></span>BEP20 (BNB Smart Chain)</button></div><button class="back-btn" data-back-target="payment-methods-view" data-title="Choose Payment Method"><i class="fa-solid fa-arrow-left"></i> Back</button></div>
+                <div id="usdtTrc20Content" class="view"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=YOUR_TRC20_ADDRESS_HERE" alt="TRC20 QR Code" class="qr-code-image"><p style="font-size: 0.9rem; margin-top: 1rem;">Send only <strong>USDT (TRC20)</strong> to this address.</p><div class="copy-box"><span id="trc20-address">YOUR_TRC20_ADDRESS_HERE</span><button class="copy-btn" data-copy-target="trc20-address"><i class="fa-regular fa-copy"></i> Copy</button></div><button class="back-btn" data-back-target="usdtSelectionContent" data-title="Pay with Crypto"><i class="fa-solid fa-arrow-left"></i> Back</button></div>
+                <div id="usdtBnbContent" class="view"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=YOUR_BEP20_ADDRESS_HERE" alt="BEP20 QR Code" class="qr-code-image"><p style="font-size: 0.9rem; margin-top: 1rem;">Send only <strong>USDT (BEP20)</strong> to this address.</p><div class="copy-box"><span id="bep20-address">YOUR_BEP20_ADDRESS_HERE</span><button class="copy-btn" data-copy-target="bep20-address"><i class="fa-regular fa-copy"></i> Copy</button></div><button class="back-btn" data-back-target="usdtSelectionContent" data-title="Pay with Crypto"><i class="fa-solid fa-arrow-left"></i> Back</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="upi-caution-modal">
+        <div class="modal-content">
+            <div class="modal-header"><button class="modal-close-btn" data-target="upi-caution-modal"><i class="fa-solid fa-times"></i></button><h2>Final Confirmation</h2></div>
+            <div class="modal-body"><p>You are about to be redirected to your UPI app. Please confirm to proceed.</p></div>
+            <div class="modal-footer">
+                <button class="modal-reject-btn" data-target="upi-caution-modal">Back</button>
+                <button class="modal-accept-btn" id="upi-caution-accept-btn">Confirm & Pay</button>
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Modal Control ---
-            const allModals = document.querySelectorAll('.modal-overlay');
-            const donateNowBtn = document.getElementById('donate-now-btn');
-            const confirmationModal = document.getElementById('confirmation-modal');
-            const paymentModal = document.getElementById('payment-modal');
-            const upiCautionModal = document.getElementById('upi-caution-modal');
-            const paymentModalTitle = document.getElementById('payment-modal-title');
-            
-            // Main Action Buttons
-            const confirmAcceptBtn = document.getElementById('confirm-accept-btn');
-            const upiCautionAcceptBtn = document.getElementById('upi-caution-accept-btn');
+    document.addEventListener('DOMContentLoaded', () => {
+        const allModals = document.querySelectorAll('.modal-overlay');
+        const donateNowBtn = document.getElementById('donate-now-btn');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const paymentModal = document.getElementById('payment-modal');
+        const upiCautionModal = document.getElementById('upi-caution-modal');
+        const paymentModalBody = document.getElementById('payment-modal-body');
+        const paymentModalTitle = document.getElementById('payment-modal-title');
+        const confirmAcceptBtn = document.getElementById('confirm-accept-btn');
+        const upiCautionAcceptBtn = document.getElementById('upi-caution-accept-btn');
+        const directUpiPayBtn = document.getElementById('direct-upi-pay-btn');
+        
+        const resetPaymentModal = () => {
+            const allViews = paymentModalBody.querySelectorAll('.view');
+            allViews.forEach(view => view.classList.remove('active'));
+            document.getElementById('payment-methods-view').classList.add('active');
+            paymentModalTitle.innerText = "Choose Payment Method";
+            const allAnimatedButtons = document.querySelectorAll('.payment-method-btn.animate-in');
+            allAnimatedButtons.forEach(btn => btn.classList.remove('animate-in'));
+        };
 
-            const openModal = (modal) => modal.classList.add('active');
-            const closeModal = (modal) => {
-                modal.classList.remove('active');
-                if(modal === paymentModal) {
-                    setTimeout(resetToMainMenu, 300);
+        const openModal = (modal) => {
+            document.body.classList.add('modal-is-active');
+            modal.classList.add('active');
+        };
+
+        const closeModal = (modal) => {
+            modal.classList.remove('active');
+            const anyActiveModals = document.querySelector('.modal-overlay.active');
+            if (!anyActiveModals) {
+                document.body.classList.remove('modal-is-active');
+                resetPaymentModal();
+            }
+        };
+        
+        donateNowBtn.addEventListener('click', () => {
+            const confModalItems = confirmationModal.querySelectorAll('.fade-in-item');
+            confModalItems.forEach(item => {
+                item.style.animation = 'none';
+                item.offsetHeight;
+                item.style.animation = ''; 
+            });
+            openModal(confirmationModal);
+        });
+
+        confirmAcceptBtn.addEventListener('click', () => {
+            confirmationModal.classList.remove('active');
+            setTimeout(() => {
+                openModal(paymentModal);
+                const initialButtons = document.querySelectorAll('#payment-methods-view .payment-method-btn');
+                initialButtons.forEach((btn, index) => {
+                    setTimeout(() => { btn.classList.add('animate-in'); }, index * 100);
+                });
+            }, 350);
+        });
+
+        document.querySelectorAll('.modal-reject-btn, .modal-close-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetModal = document.getElementById(btn.dataset.target);
+                if (targetModal) {
+                    closeModal(targetModal);
                 }
-            };
-            
-            // Open initial modal
-            donateNowBtn.addEventListener('click', () => openModal(confirmationModal));
-
-            // Handle "Accept & Proceed" from initial notice
-            confirmAcceptBtn.addEventListener('click', () => {
-                closeModal(confirmationModal);
-                setTimeout(() => openModal(paymentModal), 300);
-            });
-
-            // Make all close (X) and reject buttons work
-            document.querySelectorAll('.modal-close-btn, .modal-reject-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const modal = document.getElementById(btn.dataset.target);
-                    closeModal(modal);
-                });
-            });
-
-            // Close modals on overlay click
-            allModals.forEach(modal => {
-                modal.addEventListener('click', (event) => {
-                    if (event.target === modal) closeModal(modal);
-                });
-            });
-
-            // --- Payment View Logic ---
-            const allViews = document.querySelectorAll('.modal-body .view');
-            const allViewButtons = document.querySelectorAll('.payment-method-btn, .back-btn');
-            const defaultTitle = "Choose Payment Method";
-
-            const showView = (viewId, viewTitle = defaultTitle) => {
-                allViews.forEach(view => view.classList.remove('active'));
-                document.getElementById(viewId).classList.add('active');
-                paymentModalTitle.innerText = viewTitle;
-            };
-
-            const resetToMainMenu = () => showView('payment-methods-view', defaultTitle);
-
-            allViewButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const viewId = btn.dataset.view || btn.dataset.backTarget;
-                    const viewTitle = btn.dataset.title || defaultTitle;
-                    showView(viewId, viewTitle);
-                });
-            });
-            
-            // --- UPI Payment Logic ---
-            const upiIdInput = document.getElementById('upi-id-input');
-            const upiPayBtn = document.getElementById('upi-pay-btn');
-
-            const proceedWithUpiPayment = () => {
-                const recipientUpiId = upiIdInput.value;
-                const recipientName = 'RANDVA COMMUNITY';
-                const transactionNote = 'Donation to Community';
-                // Amount is removed to let user fill it
-                const paymentLink = `upi://pay?pa=${recipientUpiId}&pn=${encodeURIComponent(recipientName)}&tn=${encodeURIComponent(transactionNote)}&cu=INR`;
-                window.location.href = paymentLink;
-            };
-
-            upiIdInput.addEventListener('input', () => {
-                const upiRegex = /^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$/;
-                upiPayBtn.disabled = !upiRegex.test(upiIdInput.value);
-            });
-
-            upiPayBtn.addEventListener('click', () => {
-                if (!upiPayBtn.disabled) openModal(upiCautionModal);
-            });
-
-            upiCautionAcceptBtn.addEventListener('click', () => {
-                closeModal(upiCautionModal);
-                proceedWithUpiPayment();
-            });
-
-            // --- Copy Button Logic ---
-            const copyBtns = document.querySelectorAll('.copy-btn');
-            copyBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const targetId = btn.dataset.copyTarget;
-                    const textToCopy = document.getElementById(targetId).innerText;
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        const originalContent = btn.innerHTML;
-                        btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
-                        setTimeout(() => { btn.innerHTML = originalContent; }, 2000);
-                    });
-                });
             });
         });
+
+        allModals.forEach(modal => {
+            modal.addEventListener('click', (event) => { 
+                if (event.target === modal) {
+                    closeModal(modal);
+                }
+            });
+        });
+
+        const defaultTitle = "Choose Payment Method";
+        
+        const showView = (viewId, viewTitle = defaultTitle) => {
+            const currentView = paymentModalBody.querySelector('.view.active');
+            const newView = document.getElementById(viewId);
+            if (currentView && newView && currentView !== newView) {
+                currentView.classList.remove('active');
+                setTimeout(() => {
+                    newView.classList.add('active');
+                    paymentModalTitle.innerText = viewTitle;
+                    const buttonsInNewView = newView.querySelectorAll('.payment-method-btn');
+                    buttonsInNewView.forEach((btn, index) => {
+                        btn.classList.remove('animate-in');
+                        setTimeout(() => { btn.classList.add('animate-in'); }, index * 100 + 50);
+                    });
+                }, 300);
+            }
+        };
+
+        const proceedWithUpiPayment = () => {
+            const recipientUpiId = '8808703225@upi';
+            const recipientName = 'Ganga Gurukulam Career Academy';
+            const transactionNote = 'Donation to Academy';
+            const paymentLink = `upi://pay?pa=${recipientUpiId}&pn=${encodeURIComponent(recipientName)}&tn=${encodeURIComponent(transactionNote)}&cu=INR`;
+            window.location.href = paymentLink;
+        };
+
+        upiCautionAcceptBtn.addEventListener('click', () => {
+            closeModal(upiCautionModal);
+            closeModal(paymentModal);
+            proceedWithUpiPayment();
+        });
+
+        directUpiPayBtn.addEventListener('click', () => {
+            openModal(upiCautionModal);
+        });
+
+        paymentModalBody.addEventListener('click', (e) => {
+            const button = e.target.closest('.payment-method-btn, .back-btn');
+            if (!button || button.id === 'direct-upi-pay-btn') return;
+            
+            const viewId = button.dataset.view || button.dataset.backTarget;
+            const viewTitle = button.dataset.title || defaultTitle;
+            if (viewId) {
+                showView(viewId, viewTitle);
+            }
+        });
+
+        paymentModalBody.addEventListener('click', (e) => {
+            const copyBtn = e.target.closest('.copy-btn');
+            if (!copyBtn) return;
+            const targetId = copyBtn.dataset.copyTarget;
+            const textToCopy = document.getElementById(targetId).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalContent = copyBtn.innerHTML;
+                copyBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
+                setTimeout(() => { copyBtn.innerHTML = originalContent; }, 2000);
+            });
+        });
+    });
     </script>
 </body>
 </html>
-
