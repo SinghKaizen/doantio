@@ -138,17 +138,9 @@
         .back-btn { background: none; border: 1px solid var(--border-color); color: var(--text-muted); font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; transition: all 0.3s var(--smooth-ease); margin-top: 2rem; display: inline-flex; align-items: center; gap: 8px; }
         .back-btn:hover { background-color: var(--border-color); transform: scale(1.05); }
         
-        /* UPDATED: Mobile Friendly (Responsive) Styles */
         @media (max-width: 600px) { 
-            .donation-container h1 { font-size: 2rem; } 
-            .donation-container p { font-size: 1rem; line-height: 1.6; }
-            .donate-now-btn { padding: 1rem 2.5rem; font-size: 1.1rem; }
-            .modal-content { width: 95%; max-height: 95vh; }
-            .modal-header { padding: 1.25rem 1.5rem; }
-            .modal-header h2 { font-size: 1.3rem; }
-            .modal-body { padding: 1.5rem; min-height: auto; }
-            .modal-footer { padding: 1rem 1.5rem; }
-            .payment-method-btn { padding: 0.9rem; font-size: 1rem; }
+            .donation-container h1 { font-size: 2.2rem; } 
+            .modal-body { min-height: 150px; } 
             .logo { max-width: 100px; }
         }
     </style>
@@ -206,8 +198,9 @@
         const paymentModalTitle = document.getElementById('payment-modal-title');
         const confirmAcceptBtn = document.getElementById('confirm-accept-btn');
         
+        // Generate QR code for UPI dynamically
         const upiId = '8808703225@upi';
-        const upiLink = `upi://pay?pa=${upiId}&pn=Ganga%20Gurukulam`;
+        const upiLink = `upi://pay?pa=${upiId}`;
         const qrCodeImg = document.getElementById('upi-qr-code');
         if (qrCodeImg) {
             qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiLink)}`;
@@ -243,7 +236,7 @@
                 item.offsetHeight;
                 item.style.animation = ''; 
             });
-            openModal(confirmation-modal);
+            openModal(confirmationModal);
         });
 
         confirmAcceptBtn.addEventListener('click', () => {
